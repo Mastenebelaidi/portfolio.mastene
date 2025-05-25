@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastene Belaidi - Développeur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Animation de fond avec particules CSS */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #00ff88, transparent),
+                radial-gradient(2px 2px at 40px 70px, #64ffda, transparent),
+                radial-gradient(1px 1px at 90px 40px, #00ff88, transparent),
+                radial-gradient(1px 1px at 130px 80px, #64ffda, transparent),
+                radial-gradient(2px 2px at 160px 30px, #00ff88, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 8s ease-in-out infinite alternate;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+            100% { transform: scale(1.1) rotate(10deg); opacity: 0.2; }
+        }
+
+        /* Header avec effet de typing */
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.3); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #64ffda;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 4s steps(40, end);
+        }
+
+        .hero-subtitle::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #00ff88, #64ffda);
+            color: #000;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #64ffda;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #64ffda);
+            border-radius: 2px;
+        }
+
+        /* Projets avec effet de carte */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(22, 33, 62, 0.8));
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #00ff88;
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .project-title {
+            color: #00ff88;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Compétences avec barres animées */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .skill-category {
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.5), rgba(22, 33, 62, 0.5));
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-category h3 {
+            color: #64ffda;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-item {
+            margin-bottom: 25px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #64ffda);
+            border-radius: 5px;
+            position: relative;
+            animation: fillBar 3s ease-out;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Contact avec effet de glow */
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-info {
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.5), rgba(22, 33, 62, 0.5));
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            min-width: 400px;
+        }
+
+        .contact-description {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .email-link {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .email-link:hover {
+            color: #64ffda;
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animations d'apparition */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .skills-container { grid-template-columns: 1fr; gap: 30px; }
+            .contact-info { min-width: auto; width: 100%; }
+            nav { 
+                position: relative; 
+                text-align: center; 
+                top: 0;
+                right: 0;
+                margin: 20px;
+            }
+            nav ul { 
+                flex-direction: column; 
+                gap: 10px; 
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2rem; }
+            section { padding: 60px 15px; }
+            .project-card, .skill-category, .contact-info { 
+                padding: 20px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="accueil">
+        <div class="hero-content">
+            <h1 class="hero-title">MASTENE BELAIDI</h1>
+            <div class="hero-subtitle">Étudiant en BUT Informatique</div>
+            <p class="hero-description">
+                Université Gustave Eiffel | Développeur passionné
+            </p>
+            <a href="#projets" class="cta-button">Découvrir mes projets</a>
+        </div>
+    </header>
+
+    <section id="projets">
+        <h2>MES PROJETS</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-title">🎮 Jeu Tetris</div>
+                <p class="project-description">Développement d'un jeu Tetris complet en binôme avec toutes les fonctionnalités classiques : rotation des pièces, suppression des lignes, système de score et interface graphique intuitive.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Binôme</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">🏛️ Site Web UNESCO - Muraille de Chine</div>
+                <p class="project-description">Création d'un site web éducatif en partenariat avec l'UNESCO présentant l'histoire et l'importance culturelle de la Grande Muraille de Chine avec design responsive.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">Groupe</span>
+                    <span class="tech-tag">UNESCO</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">🎲 Jeu Yahtzee</div>
+                <p class="project-description">Implémentation complète du jeu de dés Yahtzee en Java avec interface graphique, gestion des scores, règles du jeu et système de tours multijoueurs.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Binôme</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">📐 Calcul de Polynômes</div>
+                <p class="project-description">Développement d'un programme en C pour les opérations sur les polynômes : addition, soustraction, multiplication, dérivation et évaluation de polynômes.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">Solo</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">🌐 Algorithmes de Graphes</div>
+                <p class="project-description">Implémentation d'algorithmes de théorie des graphes : parcours en profondeur/largeur, plus court chemin, détection de cycles et algorithmes de tri topologique.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Binôme & Groupe</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">🗄️ Base de Données Dynamique</div>
+                <p class="project-description">Conception et développement d'une application web avec base de données MySQL, interface PHP pour la gestion des données et requêtes SQL optimisées.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Binôme</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">🖥️ Serveur HTTP</div>
+                <p class="project-description">Installation, configuration et optimisation d'un serveur HTTP avec gestion de la sécurité, configuration des domaines virtuels et mise en place de certificats SSL.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Administration Système</span>
+                    <span class="tech-tag">HTTP</span>
+                    <span class="tech-tag">Trinôme</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences">
+        <h2>MES COMPÉTENCES</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>💻 Compétences Techniques</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Python</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>SQL</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Visual Studio Code</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>MySQL</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>🤝 Compétences Transversales</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Travail en équipe</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Gestion de projet</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Résolution de problèmes</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Communication</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>CONTACT</h2>
+        <div class="contact-info">
+            <p class="contact-description">Prêt à collaborer sur de nouveaux projets !</p>
+            <a href="mailto:mastenebelaidi10@gmail.com" class="email-link">mastenebelaidi10@gmail.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Mastene Belaidi - Étudiant BUT Informatique - Université Gustave Eiffel</p>
+    </footer>
+</body>
+</html>
